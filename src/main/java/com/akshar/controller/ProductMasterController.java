@@ -1,7 +1,10 @@
 package com.akshar.controller;
 
+import com.akshar.dto.ProductMasterRequest;
 import com.akshar.dto.ProductRequest;
 import com.akshar.model.Product;
+import com.akshar.model.ProductMaster;
+import com.akshar.repository.ProductMasterRepository;
 import com.akshar.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,38 +18,21 @@ import java.util.List;
 @RequestMapping("/api/product-master")
 public class ProductMasterController {
     @Autowired
-    public ProductService productService;
+    public ProductMasterRepository productMasterRepository;
 
     @PostMapping("")
-    ResponseEntity<Product> saveProduct(@RequestBody ProductRequest productRequest) {
+    ResponseEntity<ProductMaster> saveProduct(@RequestBody ProductMaster productMaster) {
 
-        Product saveProduct = productService.saveProduct(productRequest);
-
-        return new ResponseEntity<>(saveProduct, HttpStatus.OK);
-    }
-
-    @PutMapping("/{productId}")
-    ResponseEntity<Product> updateProduct(@RequestBody ProductRequest productRequest,@PathVariable int productId) {
-
-        Product saveProduct = productService.updateProduct(productRequest,productId);
-
-        return new ResponseEntity<>(saveProduct, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{productId}")
-    ResponseEntity<String> deleteProduct(@PathVariable int productId) {
-
-        productService.deleteProduct(productId);
-
-        return new ResponseEntity<>("Deleted product with id " + productId + " successfully", HttpStatus.OK);
+        ProductMaster save = productMasterRepository.save(productMaster);
+        return new ResponseEntity<>(save, HttpStatus.OK);
     }
 
     @GetMapping("")
-    ResponseEntity<List<Product>> getAllProduct() {
+    ResponseEntity<List<ProductMaster>> getAllProduct() {
 
-        List<Product> allProduct = productService.getAllProduct();
-
+        List<ProductMaster> allProduct = productMasterRepository.findAll();
         return new ResponseEntity<>(allProduct, HttpStatus.OK);
     }
+
 
 }
