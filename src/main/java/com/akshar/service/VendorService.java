@@ -40,5 +40,11 @@ public class VendorService {
 
         return vendorRepository.save(vendor);
     }
+
+    public void deleteVendor(int vendorId) {
+
+        vendorRepository.deleteById(vendorId);
+        return;
+    }
 }
 

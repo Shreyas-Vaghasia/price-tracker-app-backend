@@ -27,9 +27,9 @@ public class ProductController {
     }
 
     @PutMapping("/{productId}")
-    ResponseEntity<Product> updateProduct(@RequestBody ProductRequest productRequest,@PathVariable int productId) {
+    ResponseEntity<Product> updateProduct(@RequestBody ProductRequest productRequest, @PathVariable int productId) {
 
-        Product saveProduct = productService.updateProduct(productRequest,productId);
+        Product saveProduct = productService.updateProduct(productRequest, productId);
 
         return new ResponseEntity<>(saveProduct, HttpStatus.OK);
     }
@@ -48,6 +48,14 @@ public class ProductController {
         List<Product> allProduct = productService.getAllProduct();
 
         return new ResponseEntity<>(allProduct, HttpStatus.OK);
+    }
+
+    @GetMapping("/{productId}")
+    ResponseEntity<Product> getProductById(@PathVariable int productId) {
+
+        Product saveProduct = productService.getProductById(productId);
+
+        return new ResponseEntity<>(saveProduct, HttpStatus.OK);
     }
 
 }

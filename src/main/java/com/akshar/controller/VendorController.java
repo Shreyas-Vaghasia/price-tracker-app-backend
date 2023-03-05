@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @CrossOrigin
 @RestController
@@ -33,12 +35,21 @@ public class VendorController {
         return new ResponseEntity<>(savedVendor, HttpStatus.OK);
     }
 
+
     @PutMapping("/{vendorId}")
     ResponseEntity<Vendor> updateVendor(@RequestBody VendorRequest vendorRequest, @PathVariable int vendorId) {
 
-        Vendor savedVendor = vendorService.updateVendor(vendorRequest,vendorId);
+        Vendor savedVendor = vendorService.updateVendor(vendorRequest, vendorId);
 
         return new ResponseEntity<>(savedVendor, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{vendorId}")
+    ResponseEntity<String> deleteVendor(@PathVariable int vendorId) {
+
+         vendorService.deleteVendor(vendorId);
+
+        return new ResponseEntity<>("Vendor deleted successfully", HttpStatus.OK);
     }
 
 }

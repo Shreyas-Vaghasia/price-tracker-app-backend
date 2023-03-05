@@ -39,4 +39,8 @@ public class ProductService {
 
         return productRepository.save(product);
     }
+
+    public Product getProductById(int productId) {
+        return productRepository.findById(productId).orElse(null);
+    }
 }

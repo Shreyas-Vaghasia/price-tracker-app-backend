@@ -34,5 +34,12 @@ public class ProductMasterController {
         return new ResponseEntity<>(allProduct, HttpStatus.OK);
     }
 
+    @GetMapping("/{productId}")
+    ResponseEntity<ProductMaster> getProductById(@PathVariable int productId) {
+
+        ProductMaster product = productMasterRepository.findById(productId).orElse(null);
+        return new ResponseEntity<>(product, HttpStatus.OK);
+    }
+
 
 }
