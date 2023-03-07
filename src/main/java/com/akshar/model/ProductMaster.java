@@ -10,11 +10,12 @@ public class ProductMaster {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    int pid;
 
     String productName;
 
-    public ProductMaster(String productName) {
+    public ProductMaster(int pid, String productName) {
+        this.pid = pid;
         this.productName = productName;
     }
 
@@ -27,5 +28,21 @@ public class ProductMaster {
 
     public void setProductName(String productName) {
         this.productName = productName;
+    }
+
+    public int getPid() {
+        return pid;
+    }
+
+    public void setPid(int pid) {
+        this.pid = pid;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductMaster{" +
+                "id=" + pid +
+                ", productName='" + productName + '\'' +
+                '}';
     }
 }

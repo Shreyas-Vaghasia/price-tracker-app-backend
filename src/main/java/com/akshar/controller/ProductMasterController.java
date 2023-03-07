@@ -38,7 +38,25 @@ public class ProductMasterController {
     ResponseEntity<ProductMaster> getProductById(@PathVariable int productId) {
 
         ProductMaster product = productMasterRepository.findById(productId).orElse(null);
+        System.out.println(product);
         return new ResponseEntity<>(product, HttpStatus.OK);
+    }
+
+    @PutMapping("/{productId}")
+    ResponseEntity<ProductMaster> updateProductById(@PathVariable int productId, @RequestBody ProductMaster productMaster) {
+
+        ProductMaster product = productMasterRepository.findById(productId).orElseThrow();
+        product.setProductName(productMaster.getProductName());
+        product.setPid(productId);
+        ProductMaster savedProduct = productMasterRepository.save(product);
+        return new ResponseEntity<>(savedProduct, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{productId}")
+    ResponseEntity<String> deleteProductById(@PathVariable int productId) {
+
+        productMasterRepository.deleteById(productId);
+        return new ResponseEntity<>("product deleted successfully with id" + productId, HttpStatus.OK);
     }
 
 
