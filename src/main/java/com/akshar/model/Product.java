@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -26,5 +28,13 @@ public class Product {
     @ManyToOne
     Vendor vendor;
 
-
+    String moq;
+    String packing;
+    String ex;
+    String paymentTerms;
+    String grade;
+    @UpdateTimestamp
+    LocalDateTime lastUpdated;
+    @CreationTimestamp
+    LocalDateTime dateCreated;
 }

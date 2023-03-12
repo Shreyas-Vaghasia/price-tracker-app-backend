@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Getter
@@ -18,6 +17,8 @@ public class Vendor {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int vendorId;
+
+    @Column(unique = true)
     String vendorName;
 
     String contactNumber;

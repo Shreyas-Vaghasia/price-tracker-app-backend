@@ -15,6 +15,7 @@ public class ProductService {
 
     public Product saveProduct(ProductRequest productRequest) {
         Product product = new Product();
+
         product.setProductName(productRequest.getProductName());
         product.setProductPrice(productRequest.getProductPrice());
 
@@ -32,10 +33,16 @@ public class ProductService {
     }
 
     public Product updateProduct(ProductRequest productRequest, int productId) {
-        Product product = new Product();
+        Product product = productRepository.findById(productId).get();
         product.setProductId(productId);
-        product.setProductName(productRequest.getProductName());
+//        product.setProductName(productRequest.getProductName());
         product.setProductPrice(productRequest.getProductPrice());
+
+        product.setMoq(productRequest.getMoq());
+        product.setEx(productRequest.getEx());
+        product.setGrade(productRequest.getGrade());
+        product.setPacking(productRequest.getPacking());
+        product.setPaymentTerms(productRequest.getPaymentTerms());
 
         return productRepository.save(product);
     }

@@ -11,4 +11,5 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     @Query(value = "SELECT * FROM product WHERE vendor_id IS  NULL", nativeQuery = true)
     List<Product> findAllProducts();
+
 }

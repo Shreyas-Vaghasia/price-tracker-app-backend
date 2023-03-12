@@ -1,6 +1,7 @@
 package com.akshar.service;
 
 import com.akshar.dto.VendorRequest;
+import com.akshar.exception.DuplicateVendorNameException;
 import com.akshar.model.Product;
 import com.akshar.model.Vendor;
 import com.akshar.repository.VendorRepository;
@@ -8,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -18,6 +18,10 @@ public class VendorService {
 
     public Vendor saveProduct(VendorRequest vendorRequest) {
 
+        boolean present = vendorRepository.findByVendorName(vendorRequest.getVendorName()).isPresent();
+        if (present) {
+            throw new DuplicateVendorNameException("Vendor already exists with name :" + vendorRequest.getVendorName());
+        }
         Vendor vendor = new Vendor();
         System.out.println(vendorRequest);
         vendor.setVendorName(vendorRequest.getVendorName());
