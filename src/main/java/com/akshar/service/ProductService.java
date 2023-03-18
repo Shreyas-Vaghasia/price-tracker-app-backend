@@ -43,6 +43,7 @@ public class ProductService {
         product.setGrade(productRequest.getGrade());
         product.setPacking(productRequest.getPacking());
         product.setPaymentTerms(productRequest.getPaymentTerms());
+        product.setLastPrice(productRequest.getLastPrice());
 
         return productRepository.save(product);
     }

@@ -16,12 +16,21 @@ public class ProductRequest {
 
     String productName;
     double productPrice;
+    double lastPrice;
 
     String moq;
     String packing;
     String ex;
     String paymentTerms;
     String grade;
+
+    public double getLastPrice() {
+        return lastPrice;
+    }
+
+    public void setLastPrice(double lastPrice) {
+        this.lastPrice = lastPrice;
+    }
 
     public String getMoq() {
         return moq;
